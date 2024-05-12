@@ -1,0 +1,37 @@
+import random
+import time
+import sys
+
+# Increase the recursion depth limit (adjust as needed)
+sys.setrecursionlimit(10**6)  # Set to a higher value than the default
+
+# Define the Selection Sort algorithm
+def selection_sort(arr):
+    # Iterate through the array
+    for i in range(len(arr)):
+        # Find the index of the minimum element in the unsorted part
+        min_idx = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        # Swap the minimum element with the first element of the unsorted part
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+# Function to find the kth smallest element using Selection Sort
+def kth_smallest_selection_sort(arr, k):
+    # Sort the array using Selection Sort
+    start_time = time.time()  # Start time measurement
+    sorted_arr = selection_sort(arr)
+    end_time = time.time()  # End time measurement
+    elapsed_time = end_time - start_time  # Calculate elapsed time
+    # Return the kth smallest element and the elapsed time
+    return sorted_arr[k-1], elapsed_time
+
+# Generate a random array of 10 input values ranging from 0 to 100
+input_values = [random.randint(0, 100) for _ in range(10)]
+print("Input Array:", input_values)
+k = 1  # Example value of k
+result, time_taken = kth_smallest_selection_sort(input_values, k)
+print(f"{k}th Smallest Element:", result)
+print("Time Taken:", time_taken, "seconds")
